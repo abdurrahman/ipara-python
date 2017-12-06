@@ -1,6 +1,6 @@
 # coding=utf-8
 
-import iparapayment
+import ipara
 
 card_xml = """
 <cardOwnerName>Abdurrahman Işık</cardOwnerName>
@@ -66,7 +66,7 @@ purchaser_xml = """
 </purchaser>
 """
 
-mode_xml = "<mode>{}</mode>".format(iparapayment.mode)
+mode_xml = "<mode>{}</mode>".format(ipara.mode)
 # echo_xml = "<echo></echo>"  # optional
 threeD_xml = "<threeD>false</threeD>"
 installment_xml = "<installment>1</installment>"
@@ -90,6 +90,6 @@ xml_body = """<?xml version='1.0' encoding='utf-8'?>
     amount_xml.strip(),
 )
 
-result = iparapayment.PaymentServices().pay_without_3d(xml_body)
+result = ipara.PaymentService().pay_without_3d(xml_body)
 
 print result.read().decode('utf-8')

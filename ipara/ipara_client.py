@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 import json
 from datetime import datetime
 
-import iparapayment
+import ipara
 
 class IParaClient:
     def __init__(self):
@@ -15,10 +15,10 @@ class IParaClient:
     def api_request(self, method, url, random_string, accept_type, request=None):
         if sys.version_info < (3, 0):
             import httplib
-            connection = httplib.HTTPSConnection(iparapayment.base_url)
+            connection = httplib.HTTPSConnection(ipara.base_url)
         else:
             import http.client
-            connection = http.client.HTTPSConnection(iparapayment.base_url)
+            connection = http.client.HTTPSConnection(ipara.base_url)
         if accept_type == 'xml':
             request_body = request
         if accept_type == 'json':
@@ -31,7 +31,7 @@ class IParaClient:
         if accept_type == "xml":
             header.update({"Content-type": "application/xml"})
         header.update({'transactionDate': self.get_transaction_date()})
-        header.update({'version': iparapayment.version})
+        header.update({'version': ipara.version})
         header.update({'token': self.generate_token(random_str)})
         return header
 
@@ -45,10 +45,9 @@ class IParaClient:
         else:
             sha1_digest = hashlib.sha1(token_string.encode()).digest()
         hashed_str = base64.b64encode(sha1_digest)
-        return "{0}:{1}".format(iparapayment.public_key, hashed_str.decode('utf-8'))
+        return "{0}:{1}".format(ipara.public_key, hashed_str.decode('utf-8'))
 
-# Todo: Add methods description
-class PaymentServices(IParaClient):
+class PaymentService(IParaClient):
     # Todo: Refactor this method for more efficient
     def pay_without_3d(self, request):
         xml_data = ET.fromstring(request)
@@ -66,7 +65,7 @@ class PaymentServices(IParaClient):
         purchaser_surname = xml_data.find('./purchaser/surname')
         purchaser_email = xml_data.find('./purchaser/email')
 
-        random_str = iparapayment.private_key + order_id.text.encode('utf-8').strip() + amount.text + mode.text
+        random_str = ipara.private_key + order_id.text.encode('utf-8').strip() + amount.text + mode.text
         random_str += card_owner_name.text + card_number.text + card_expire_month.text
         random_str += card_expire_year.text + cvc.text
         if user_id.text is not None:
@@ -82,9 +81,12 @@ class PaymentServices(IParaClient):
         xml_data = ET.fromstring(request)
         order_id = xml_data.find('./orderId')
         mode = xml_data.find('./mode')
-        random_str = iparapayment.private_key + str(order_id.text) + mode.text + self.get_transaction_date()
+        random_str = ipara.private_key + str(order_id.text) + mode.text + self.get_transaction_date()
         return self.api_request('POST', '/rest/payment/inquiry', random_str, 'xml', request)
 
     def get_bin_number(self, request):
-        random_str = iparapayment.private_key + request['binNumber'] + self.get_transaction_date()
+        random_str = ipara.private_key + request['binNumber'] + self.get_transaction_date()
         return self.api_request('POST', '/rest/payment/bin/lookup', random_str, 'json', request)
+
+class WalletService(IParaClient):
+    pass

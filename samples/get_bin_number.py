@@ -1,6 +1,6 @@
 # coding=utf-8
 
-import iparapayment
+import ipara
 
 json_body = {
     'binNumber': '498749'
@@ -8,6 +8,6 @@ json_body = {
 
 print json_body
 
-bin_number = iparapayment.PaymentServices().get_bin_number(json_body)
+bin_number = ipara.PaymentService().get_bin_number(json_body)
 
 print bin_number.read().decode('utf-8')

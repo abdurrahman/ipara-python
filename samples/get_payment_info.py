@@ -1,6 +1,6 @@
 # coding=utf-8
 
-import iparapayment
+import ipara
 
 request_data = """<?xml version='1.0' encoding='utf-8'?>
 <inquiry>
@@ -8,6 +8,6 @@ request_data = """<?xml version='1.0' encoding='utf-8'?>
     <mode>P</mode>
 </inquiry>
 """
-payment_info = iparapayment.PaymentServices().get_payment_info(request_data)
+payment_info = ipara.PaymentService().get_payment_info(request_data)
 
 print payment_info.read().decode('utf-8')

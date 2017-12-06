@@ -14,6 +14,7 @@ version = "1.0"
 mode = "T"
 
 # Resource
-from iparapayment.ipara_client import (
-    PaymentServices
+from ipara.ipara_client import (
+    PaymentService,
+    WalletService
 )
