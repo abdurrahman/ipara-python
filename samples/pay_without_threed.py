@@ -34,8 +34,8 @@ products_xml = """
 
 purchaser_xml = """
 <purchaser>
-    <name>Abdurrahman</name>
-    <surname>Işık</surname>
+    <name>Murat</name>
+    <surname>Kaya</surname>
     <email>murat@kaya.com</email>
     <clientIp>123.58.7.4</clientIp>
     <birthDate>1976-07-11</birthDate>

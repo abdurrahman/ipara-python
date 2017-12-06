@@ -89,4 +89,8 @@ class PaymentService(IParaClient):
         return self.api_request('POST', '/rest/payment/bin/lookup', random_str, 'json', request)
 
 class WalletService(IParaClient):
-    pass
+    def create(self, request):
+        random_str = ipara.private_key + request['userId'] + request['cardOwnerName']
+        random_str += request['cardNumber'] + request['cardExpireMonth'] + request['cardExpireYear']
+        random_str += request['clientIp'] + self.get_transaction_date()
+        return self.api_request('POST', '/bankcard/create', random_str, 'json', request)
