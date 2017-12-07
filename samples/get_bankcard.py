@@ -8,6 +8,6 @@ json_body = {
     'clientIp': '127.0.0.1'
 }
 
-result = ipara.WalletService().retrieve(json_body)
+result = ipara.WalletService().get_bankcard(json_body)
 
 print result.read().decode('utf-8')

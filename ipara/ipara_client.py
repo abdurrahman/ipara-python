@@ -66,8 +66,8 @@ class PaymentService(IParaClient):
         purchaser_email = xml_data.find('./purchaser/email')
 
         random_str = ipara.private_key + order_id.text.encode('utf-8').strip() + amount.text + mode.text
-        random_str += card_owner_name.text + card_number.text + card_expire_month.text
-        random_str += card_expire_year.text + cvc.text
+        random_str += str(card_owner_name.text) + str(card_number.text) + str(card_expire_month.text)
+        random_str += str(card_expire_year.text) + str(cvc.text)
         if user_id.text is not None:
             random_str += user_id.text
         if card_id.text is not None:
@@ -89,13 +89,16 @@ class PaymentService(IParaClient):
         return self.api_request('POST', '/rest/payment/bin/lookup', random_str, 'json', request)
 
 class WalletService(IParaClient):
-    def create(self, request):
+    def insert_bankcard(self, request):
+        """Add the user's bank cards to the purse
+        :param request: request body params
+        """
         random_str = ipara.private_key + request['userId'] + request['cardOwnerName']
         random_str += request['cardNumber'] + request['cardExpireMonth'] + request['cardExpireYear']
         random_str += request['clientIp'] + self.get_transaction_date()
         return self.api_request('POST', '/bankcard/create', random_str, 'json', request)
 
-    def retrieve(self, request):
+    def get_bankcard(self, request):
         """Fetches list of user's bank cards.
         :param request: request body params
         """

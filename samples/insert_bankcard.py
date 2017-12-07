@@ -12,6 +12,6 @@ json_body = {
     'clientIp': '127.0.0.1'
 }
 
-result = ipara.WalletService().create(json_body)
+result = ipara.WalletService().insert_bankcard(json_body)
 
 print result.read().decode('utf-8')
