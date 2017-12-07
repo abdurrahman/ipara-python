@@ -94,3 +94,19 @@ class WalletService(IParaClient):
         random_str += request['cardNumber'] + request['cardExpireMonth'] + request['cardExpireYear']
         random_str += request['clientIp'] + self.get_transaction_date()
         return self.api_request('POST', '/bankcard/create', random_str, 'json', request)
+
+    def retrieve(self, request):
+        """Fetches list of user's bank cards.
+        :param request: request body params
+        """
+        random_str = ipara.private_key + request['userId'] + request['cardId']
+        random_str += request['clientIp'] + self.get_transaction_date()
+        return self.api_request('POST', '/bankcard/inquiry', random_str, 'json', request)
+
+    def delete_bankcard(self, request):
+        """Deletes one or more bank card of user.
+        :param request: request body params
+        """
+        random_str = ipara.private_key + request['userId'] + request['cardId']
+        random_str += request['clientIp'] + self.get_transaction_date()
+        return self.api_request('POST', '/bankcard/delete', random_str, 'json', request)
