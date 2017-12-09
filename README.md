@@ -1,6 +1,4 @@
-# ipara-python
-
-[![Build Status](https://travis-ci.org/abdurrahman/ipara-python.svg?branch=master)](https://travis-ci.org/abdurrahman/ipara-python)
+# ipara-python  [![Build Status](https://travis-ci.org/abdurrahman/ipara-python.svg?branch=master)](https://travis-ci.org/abdurrahman/ipara-python)
 
 A python library for integration with iPara Online Payment Services
 
@@ -8,7 +6,9 @@ A python library for integration with iPara Online Payment Services
 
 iPara uses both XML and JSON in api requests according to service structures.
 Make sure you sending requests are in test mode during test.
+
 Be sure to check [the documentation](https://dev.ipara.com.tr/) for using the API. (I mean like how to create hash value or deployment to production for example)
+
 For more information - https://dev.ipara.com.tr/
 
 ## Usage
