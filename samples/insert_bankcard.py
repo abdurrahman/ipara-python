@@ -4,7 +4,7 @@ import ipara
 
 json_body = {
     'userId': '123',
-    'cardOwnerName': 'Abdurrahman Işık',
+    'cardOwnerName': 'Card Holder Name',
     'cardNumber': '5571135571135575',
     'cardAlias': 'MyVisa',
     'cardExpireMonth': '12',

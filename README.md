@@ -2,7 +2,52 @@
 
 [![Build Status](https://travis-ci.org/abdurrahman/ipara-python.svg?branch=master)](https://travis-ci.org/abdurrahman/ipara-python)
 
+A python library for integration with iPara Online Payment Services
+
+## Getting Started
+
+iPara uses both XML and JSON in api requests according to service structures.
+Make sure you sending requests are in test mode during test.
+Be sure to check [the documentation](https://dev.ipara.com.tr/) for using the API. (I mean like how to create hash value or deployment to production for example)
 For more information - https://dev.ipara.com.tr/
+
+## Usage
+
+A sample adding bank card to the wallet
+
+```python
+json_body = {
+    'userId': '123',
+    'cardOwnerName': 'Card Holder Name',
+    'cardNumber': '5571135571135575',
+    'cardAlias': 'MyVisa',
+    'cardExpireMonth': '12',
+    'cardExpireYear': '22',
+    'clientIp': '127.0.0.1'
+}
+
+result = ipara.WalletService().insert_bankcard(json_body)
+
+print result.read().decode('utf-8')
+```
+
+A sample getting bank card/s from wallet
+
+```python
+import ipara
+
+json_body = {
+    'userId': '123',
+    'cardId': '',
+    'clientIp': '127.0.0.1'
+}
+
+result = ipara.WalletService().get_bankcard(json_body)
+
+print result.read().decode('utf-8')
+```
+
+You can take a look the other usages in samples folder
 
 ## Test Cards
 
