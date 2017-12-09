@@ -7,9 +7,9 @@ A python library for integration with iPara Online Payment Services
 iPara uses both XML and JSON in api requests according to service structures.
 Make sure you sending requests are in test mode during test.
 
-Be sure to check [the documentation](https://dev.ipara.com.tr/) for using the API. (I mean like how to create hash value or deployment to production for example)
+Be sure to check the documentation before using the API. (I mean like how to create hash value or deployment to production for example)
 
-For more information - https://dev.ipara.com.tr/
+iPara API Documentation - https://dev.ipara.com.tr/
 
 ## Usage
 
